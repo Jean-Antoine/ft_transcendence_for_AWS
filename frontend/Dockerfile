@@ -8,3 +8,5 @@ RUN		openssl req -x509 -nodes \
 	-keyout /home/ca.key \
 	-subj "/C=FR/ST=Paris/L=Paris/O=42/OU=42/CN=localhost/UID=admin_name"
 COPY	./site/ /site/
+EXPOSE	80
+EXPOSE	443

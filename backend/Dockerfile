@@ -7,4 +7,5 @@ COPY	./requirements.txt ./requirements.txt
 RUN		pip install -r requirements.txt
 COPY	./apps /apps
 COPY	./entrypoint.sh ./entrypoint.sh
+EXPOSE	8000
 ENTRYPOINT [ "/bin/bash", "./entrypoint.sh" ]
