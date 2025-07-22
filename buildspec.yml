@@ -10,15 +10,15 @@ env:
     - FRONTEND_IMAGE_URI
 
 phases:
-  pre_build:
-    commands:
-      - echo Logging in to Amazon ECR...
-      - $(aws ecr get-login --no-include-email --region $AWS_REGION)
-      - ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-      - BACKEND_IMAGE_URI=$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_BACKEND_REPO
-      - FRONTEND_IMAGE_URI=$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_FRONTEND_REPO
-      - echo "Backend Image URI:" $BACKEND_IMAGE_URI
-      - echo "Frontend Image URI:" $FRONTEND_IMAGE_URI
+pre_build:
+  commands:
+    - echo Logging in to Amazon ECR...
+    - ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+    - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+    - BACKEND_IMAGE_URI=$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_BACKEND_REPO
+    - FRONTEND_IMAGE_URI=$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_FRONTEND_REPO
+    - echo Backend Image URI $BACKEND_IMAGE_URI
+    - echo Frontend Image URI $FRONTEND_IMAGE_URI
 
   build:
     commands:
