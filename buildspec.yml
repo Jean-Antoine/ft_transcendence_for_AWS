@@ -17,8 +17,8 @@ phases:
       - ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
       - BACKEND_IMAGE_URI=$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_BACKEND_REPO
       - FRONTEND_IMAGE_URI=$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_FRONTEND_REPO
-      - echo Backend Image URI: $BACKEND_IMAGE_URI
-      - echo Frontend Image URI: $FRONTEND_IMAGE_URI
+      - echo "Backend Image URI:" $BACKEND_IMAGE_URI
+      - echo "Frontend Image URI:" $FRONTEND_IMAGE_URI
 
   build:
     commands:
