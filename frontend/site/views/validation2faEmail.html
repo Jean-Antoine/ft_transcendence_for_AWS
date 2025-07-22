@@ -1,0 +1,22 @@
+<h1 data-i18n="EmailVerification" id="page-title">Email verification required to enable two-factor authentification</h1>
+<div class="row w-100 justify-content-center mt-4">
+  <div class="d-flex flex-column gap-3" style="max-width: 30rem">
+    <h4 data-i18n="confirmEmail">
+      Confirm your email address with the code you received:
+    </h4>
+    <input
+      data-i18n="verificationCode"
+      type="text"
+      class="form-control"
+      id="verification-code"
+      placeholder="Verification code"
+      required />
+    <button data-i18n="verifyApp" data-action="verify-2fa-mail" type="submit" class="btn w-100">
+      VERIFY
+    </button>
+    <button data-i18n="newCode" data-action="send-new-code" type="submit" class="btn w-100">
+      SEND NEW CODE
+    </button>
+    <a data-i18n="backProfil" data-action="navigate" href="profile" class="btn btn-outline-secondary">BACK TO PROFILE</a>
+  </div>
+</div>

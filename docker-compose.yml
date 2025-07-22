@@ -1,7 +1,7 @@
 services:
 
   postgres:
-    build: ./srcs/postgres
+    build: ./postgres
     image: postgres
     container_name: postgres
     volumes:
@@ -16,7 +16,7 @@ services:
     restart: always
 
   backend:
-    build: ./srcs/backend
+    build: ./backend
     image: backend
     container_name: backend
     restart: always
@@ -39,7 +39,7 @@ services:
       - ".env"
 
   frontend:
-    build: ./srcs/frontend
+    build: ./frontend
     image: frontend
     container_name: frontend
     volumes:
