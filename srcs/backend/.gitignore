@@ -1,3 +1,0 @@
-env*
-./apps/users/__pycache__/*
-./apps/media/*
