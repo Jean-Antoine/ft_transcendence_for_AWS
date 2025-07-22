@@ -29,7 +29,7 @@ phases:
       - docker push $BACKEND_IMAGE_URI:latest
 
       - echo Deploying frontend to S3...
-      - aws s3 sync frontend/site/ s3://$FRONTEND_S3_BUCKET/ --delete
+      - aws s3 sync ./frontend/site/ s3://$FRONTEND_S3_BUCKET/ --delete
       - echo Build and deployment complete!
 
 artifacts:
