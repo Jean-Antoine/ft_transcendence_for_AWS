@@ -1,0 +1,44 @@
+version: 0.2
+
+env:
+  variables:
+    AWS_REGION: "eu-west-3"
+    ECR_BACKEND_REPO: "ft_transcendence/backend"
+    ECR_FRONTEND_REPO: "ft_transcendence/frontend"
+  exported-variables:
+    - BACKEND_IMAGE_URI
+    - FRONTEND_IMAGE_URI
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region $AWS_REGION)
+      - ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+      - BACKEND_IMAGE_URI=$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_BACKEND_REPO
+      - FRONTEND_IMAGE_URI=$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_FRONTEND_REPO
+      - echo Backend Image URI: $BACKEND_IMAGE_URI
+      - echo Frontend Image URI: $FRONTEND_IMAGE_URI
+
+  build:
+    commands:
+      # Backend
+      - echo Building backend Docker image...
+      - docker build -t $BACKEND_IMAGE_URI ./backend
+      - docker tag $BACKEND_IMAGE_URI $BACKEND_IMAGE_URI:latest
+
+      # Frontend
+      - echo Building frontend Docker image...
+      - docker build -t $FRONTEND_IMAGE_URI ./frontend
+      - docker tag $FRONTEND_IMAGE_URI $FRONTEND_IMAGE_URI:latest
+
+  post_build:
+    commands:
+      - echo Pushing backend Docker image...
+      - docker push $BACKEND_IMAGE_URI:latest
+      - echo Pushing frontend Docker image...
+      - docker push $FRONTEND_IMAGE_URI:latest
+      - echo Build and push completed!
+
+artifacts:
+  files: []
