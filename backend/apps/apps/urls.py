@@ -12,9 +12,9 @@ urlpatterns = [
     
     path('token/refresh/', CookieTokenRefreshView.as_view()),
     
-    path('user/', include("users.urls")),
-    path('profile/', include("userprofile.urls")),
-    path('dashboards/', include("dashboards.urls")),
-    path('friends/', include("friendship.urls")),
-	path("tournament/", include("tournament.urls")), 
+    path('api/user/', include("users.urls")),
+    path('api/profile/', include("userprofile.urls")),
+    path('api/dashboards/', include("dashboards.urls")),
+    path('api/friends/', include("friendship.urls")),
+	path("api/tournament/", include("tournament.urls")), 
 ]
