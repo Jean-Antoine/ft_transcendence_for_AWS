@@ -4,7 +4,7 @@ env:
   variables:
     AWS_REGION: "eu-west-3"
     ECR_BACKEND_REPO: "ft_transcendence/backend"
-    FRONTEND_S3_BUCKET: "transcendence-front-end" 
+    FRONTEND_S3_BUCKET: "transcendence-frontend-bucket" 
   exported-variables:
     - BACKEND_IMAGE_URI
 
