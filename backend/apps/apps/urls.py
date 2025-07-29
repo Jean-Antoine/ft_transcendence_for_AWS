@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 from users.views import CookieTokenRefreshView
+from health.views import health_check
 
 urlpatterns = [
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
@@ -17,4 +18,5 @@ urlpatterns = [
     path('api/dashboards/', include("dashboards.urls")),
     path('api/friends/', include("friendship.urls")),
 	path("api/tournament/", include("tournament.urls")), 
+    path('health/', health_check, name='health_check'),
 ]
