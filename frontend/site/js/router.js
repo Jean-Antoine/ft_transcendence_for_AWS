@@ -2,14 +2,14 @@ import checkAuth from "./api.js";
 import loadView from "./views.js";
 import killGame from "./actions/pong.js";
 import doLanguage from "./translate.js";
-// import chat from "./chat.js";
+import chat from "./chat.js";
 
 const publicRoutes = new Set(["login", "signup"]);
 
 export async function authRedirector(route) {
   const isAuthenticated = await checkAuth();
-  // if (isAuthenticated) chat.connect();
-  // else chat.disconnect();
+  if (isAuthenticated) chat.connect();
+  else chat.disconnect();
   if (isAuthenticated && publicRoutes.has(route)) return "home";
   else if (!isAuthenticated && !publicRoutes.has(route)) return "login";
   return route;

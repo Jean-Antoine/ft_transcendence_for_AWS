@@ -36,8 +36,8 @@ class Chat {
 
     this.onopen = () => {
       console.log("✅ WebSocket Users connected!");
-      this.reconnectAttempts = 0;
-      this.reconnect = true;
+      // this.reconnectAttempts = 0;
+      // this.reconnect = true;
       show(getFooter());
     };
 
@@ -45,16 +45,16 @@ class Chat {
       this.socket = null;
       clearFriendListContainer();
       console.error("❌ WebSocket Users error");
-      if (this.reconnect)
-        setTimeout(() => this.connect(), 5000);
+      // if (this.reconnect)
+      //   setTimeout(() => this.connect(), 5000);
     };
 
     this.onclose = () => {
       this.socket = null;
       clearFriendListContainer();
       console.log("🔴 WebSocket Users closed.");
-      if (this.reconnect)
-        setTimeout(() => this.connect(), 1000);
+      // if (this.reconnect)
+      //   setTimeout(() => this.connect(), 1000);
     };
 
     this.onmessage = async (event) => {
@@ -173,14 +173,14 @@ class Chat {
   }
 
   connect() {
-    if (this.socket === null && this.reconnectAttempts >= MAXATTEMPTS)
-    {
-      this.reconnectAttempts = 0;
-      return showModal(null, { i18n: "chatFailed" });
-    }
+    // if (this.socket === null && this.reconnectAttempts >= MAXATTEMPTS)
+    // {
+    //   this.reconnectAttempts = 0;
+    //   return showModal(null, { i18n: "chatFailed" });
+    // }
 
     if (this.socket === null) {
-      this.reconnectAttempts++;
+      // this.reconnectAttempts++;
       this.socket = new WebSocket("/ws/users/");
     }
 
